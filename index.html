@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Animated Hero Section</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Container Styling */
+    body, html {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #111;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+    }
+
+    /* Glowing Animation Border */
+    .glowing {
+      position: absolute;
+      width: 800px;
+      height: 600px;
+      border-radius: 30px;
+      animation: rotateGlowing 20s linear infinite;
+      z-index: 0;
+      transform-origin: center;
+    }
+
+    /* Individual Glowing Circles */
+    .glowing span {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 255, 255, 0.8), transparent);
+      animation: colorShift 4s linear infinite;
+    }
+
+    .glowing span:nth-child(1) { top: -50px; left: 50%; transform: translateX(-50%); }
+    .glowing span:nth-child(2) { bottom: -50px; left: 50%; transform: translateX(-50%); }
+    .glowing span:nth-child(3) { top: 50%; left: -50px; transform: translateY(-50%); }
+    .glowing span:nth-child(4) { top: 50%; right: -50px; transform: translateY(-50%); }
+    .glowing span:nth-child(5) { top: -50px; left: -50px; }
+    .glowing span:nth-child(6) { top: -50px; right: -50px; }
+    .glowing span:nth-child(7) { bottom: -50px; left: -50px; }
+    .glowing span:nth-child(8) { bottom: -50px; right: -50px; }
+
+    /* Glowing Animations */
+    @keyframes rotateGlowing {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes colorShift {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    /* Hero Section Box */
+    .hero-box {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 600px;
+      padding: 50px;
+      background: rgba(20, 20, 20, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      z-index: 1;
+      animation: scaleIn 3s cubic-bezier(0.5, 1.5, 0.5, 1) infinite;
+    }
+
+    /* Hero Section Content */
+    .hero-box h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      overflow: hidden; /* Ensures the text is hidden while typing */
+      border-right: 0.15em solid #00ffcc; /* Typing cursor effect */
+      white-space: nowrap; /* Prevent text from wrapping */
+      width: 0; /* Start width at 0 */
+      animation: type 4s steps(30, end) forwards, blink 0.75s step-end infinite;
+    }
+
+    @keyframes type {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .hero-box p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: #ddd;
+      animation: fadeIn 1.5s ease-in-out forwards;
+      opacity: 0;
+    }
+
+    /* Button Styling */
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      color: #111;
+      background-color: #00ffcc;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      position: relative;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+
+    /* Hover Effect for Button */
+    .btn:hover {
+      background-color: #00e6b8;
+      transform: scale(1.1) translateY(-5px);
+      box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00e6b8;
+    }
+
+    /* Button Glow Animation */
+    @keyframes pulse {
+      0% { box-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc; }
+      50% { box-shadow: 0 0 15px #00e6b8, 0 0 30px #00e6b8; }
+      100% { box-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc; }
+    }
+
+    /* Hero Box Animations */
+    @keyframes scaleIn {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Floating Icons */
+    .floating-icons {
+      position: absolute;
+      bottom: 20px;
+      display: flex;
+      gap: 20px;
+      z-index: 1;
+    }
+
+    .icon {
+      width: 50px; /* Set the size of the icons */
+      height: 50px;
+      background-color: #00ffcc;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translatey(0); }
+      50% { transform: translatey(-15px); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Glowing Animation Layer -->
+    <div class="glowing">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- Hero Content Box -->
+    <div class="hero-box">
+      <h1>Hi, I'm Vaibhav Upare</h1>
+      <p>DevOps Engineer | Automation Expert | Cloud Architect</p>
+      <p>Building scalable, secure, and highly available infrastructure.</p>
+      <div class="btn-group">
+        <a href="https://vaibhav0342.github.io/Explore-Tech-Projects-Download-Notes/" class="btn">Explore My Work</a>
+        <a href="https://vaibhav0342.github.io/portfolio/" class="btn">Portfolio</a>
+        <a href="https://github.com/vaibhav0342" class="btn">GitHub</a>
+      </div>
+    </div>
+
+    <!-- Floating Technology Icons -->
+    <div class="floating-icons">
+      <div class="icon">🐳</div> <!-- Placeholder for Docker -->
+      <div class="icon">☸️</div> <!-- Placeholder for Kubernetes -->
+      <div class="icon">☁️</div> <!-- Placeholder for AWS -->
+      <div class="icon">🔧</div> <!-- Placeholder for Jenkins -->
+    </div>
+  </div>
+
+</body>
+</html>
+
+
