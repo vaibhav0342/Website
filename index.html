@@ -3,206 +3,193 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Animated Hero Section</title>
+  <title>Vaibhav Upare - Portfolio</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* General Reset */
+    body, html {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+        color: #ffffff;
+        overflow: hidden;
     }
 
     /* Container Styling */
-    body, html {
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #111;
-      font-family: Arial, sans-serif;
-      color: #fff;
-      overflow: hidden;
-    }
-
     .container {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      width: 100vw;
-      overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
     }
 
-    /* Glowing Animation Border */
-    .glowing {
-      position: absolute;
-      width: 800px;
-      height: 600px;
-      border-radius: 30px;
-      animation: rotateGlowing 20s linear infinite;
-      z-index: 0;
-      transform-origin: center;
+    /* Rotating Background Circles */
+    .rotating-circles {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 150vmax;
+        height: 150vmax;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+        animation: spin 30s linear infinite;
     }
 
-    /* Individual Glowing Circles */
-    .glowing span {
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 255, 255, 0.8), transparent);
-      animation: colorShift 4s linear infinite;
+    .rotating-circles div {
+        position: absolute;
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        animation: rotateCircle 15s linear infinite;
     }
 
-    .glowing span:nth-child(1) { top: -50px; left: 50%; transform: translateX(-50%); }
-    .glowing span:nth-child(2) { bottom: -50px; left: 50%; transform: translateX(-50%); }
-    .glowing span:nth-child(3) { top: 50%; left: -50px; transform: translateY(-50%); }
-    .glowing span:nth-child(4) { top: 50%; right: -50px; transform: translateY(-50%); }
-    .glowing span:nth-child(5) { top: -50px; left: -50px; }
-    .glowing span:nth-child(6) { top: -50px; right: -50px; }
-    .glowing span:nth-child(7) { bottom: -50px; left: -50px; }
-    .glowing span:nth-child(8) { bottom: -50px; right: -50px; }
-
-    /* Glowing Animations */
-    @keyframes rotateGlowing {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    .rotating-circles div:nth-child(1) {
+        width: 80%;
+        height: 80%;
+        animation-delay: 0s;
     }
 
-    @keyframes colorShift {
-      0% { filter: hue-rotate(0deg); }
-      100% { filter: hue-rotate(360deg); }
+    .rotating-circles div:nth-child(2) {
+        width: 60%;
+        height: 60%;
+        animation-delay: 5s;
     }
 
-    /* Hero Section Box */
+    .rotating-circles div:nth-child(3) {
+        width: 40%;
+        height: 40%;
+        animation-delay: 10s;
+    }
+
+    @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes rotateCircle {
+        0%, 100% { transform: scale(1); opacity: 0.6; }
+        50% { transform: scale(1.2); opacity: 1; }
+    }
+
+    /* Hero Content */
     .hero-box {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 600px;
-      padding: 50px;
-      background: rgba(20, 20, 20, 0.9);
-      border-radius: 20px;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
-      text-align: center;
-      z-index: 1;
-      animation: scaleIn 3s cubic-bezier(0.5, 1.5, 0.5, 1) infinite;
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        max-width: 800px;
+        animation: fadeInZoom 2s ease-in-out;
     }
 
-    /* Hero Section Content */
     .hero-box h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-      overflow: hidden; /* Ensures the text is hidden while typing */
-      border-right: 0.15em solid #00ffcc; /* Typing cursor effect */
-      white-space: nowrap; /* Prevent text from wrapping */
-      width: 0; /* Start width at 0 */
-      animation: type 4s steps(30, end) forwards, blink 0.75s step-end infinite;
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, #ff0077, #00ffff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: textGlow 3s infinite alternate;
     }
 
-    @keyframes type {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-
-    @keyframes blink {
-      50% { border-color: transparent; }
+    @keyframes textGlow {
+        0% { text-shadow: 0 0 10px #ff0077, 0 0 20px #00ffff; }
+        100% { text-shadow: 0 0 20px #ff0077, 0 0 30px #00ffff; }
     }
 
     .hero-box p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-      color: #ddd;
-      animation: fadeIn 1.5s ease-in-out forwards;
-      opacity: 0;
+        font-size: 1.5rem;
+        margin: 1rem 0;
+        color: rgba(255, 255, 255, 0.8);
+        animation: fadeIn 2.5s ease-in-out;
     }
 
-    /* Button Styling */
+    @keyframes fadeInZoom {
+        0% { opacity: 0; transform: scale(0.8); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Button Group */
     .btn-group {
-      display: flex;
-      gap: 1rem;
+        margin-top: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
     }
 
     .btn {
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
-      color: #111;
-      background-color: #00ffcc;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      position: relative;
-      transition: transform 0.3s ease, background-color 0.3s ease;
-      animation: pulse 2s infinite;
+        padding: 12px 24px;
+        font-size: 1rem;
+        text-decoration: none;
+        color: #fff;
+        background: linear-gradient(90deg, #ff0077, #1e90ff);
+        border: none;
+        border-radius: 25px;
+        transition: all 0.4s ease;
+        animation: fadeInUp 3s ease-in-out;
     }
 
-    /* Hover Effect for Button */
     .btn:hover {
-      background-color: #00e6b8;
-      transform: scale(1.1) translateY(-5px);
-      box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00e6b8;
+        background: linear-gradient(90deg, #1e90ff, #ff0077);
+        transform: translateY(-5px);
+        box-shadow: 0px 15px 30px rgba(255, 0, 119, 0.4);
     }
 
-    /* Button Glow Animation */
-    @keyframes pulse {
-      0% { box-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc; }
-      50% { box-shadow: 0 0 15px #00e6b8, 0 0 30px #00e6b8; }
-      100% { box-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc; }
-    }
-
-    /* Hero Box Animations */
-    @keyframes scaleIn {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
+    @keyframes fadeInUp {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
     }
 
     /* Floating Icons */
     .floating-icons {
-      position: absolute;
-      bottom: 20px;
-      display: flex;
-      gap: 20px;
-      z-index: 1;
+        display: flex;
+        gap: 20px;
+        position: absolute;
+        bottom: 50px;
+        animation: bounce 3s infinite;
     }
 
-    .icon {
-      width: 50px; /* Set the size of the icons */
-      height: 50px;
-      background-color: #00ffcc;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: float 3s ease-in-out infinite;
+    .floating-icons .icon {
+        font-size: 2rem;
+        color: rgba(255, 255, 255, 0.8);
+        animation: iconPulse 2s infinite;
+        transition: transform 0.3s ease;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translatey(0); }
-      50% { transform: translatey(-15px); }
+    .floating-icons .icon:hover {
+        transform: scale(1.3);
+        color: #ff0077;
     }
 
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    @keyframes iconPulse {
+        0%, 100% { opacity: 0.8; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .hero-box h1 { font-size: 2.5rem; }
+        .hero-box p { font-size: 1rem; }
+    }
+
+    @media (max-width: 480px) {
+        .hero-box h1 { font-size: 2rem; }
+        .hero-box p { font-size: 0.9rem; }
+    }
   </style>
 </head>
 <body>
-
   <div class="container">
-    <!-- Glowing Animation Layer -->
-    <div class="glowing">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
+    <!-- Rotating Background Circles -->
+    <div class="rotating-circles">
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
 
     <!-- Hero Content Box -->
@@ -212,19 +199,22 @@
       <p>Building scalable, secure, and highly available infrastructure.</p>
       <div class="btn-group">
         <a href="https://vaibhav0342.github.io/Explore-Tech-Projects-Download-Notes/" class="btn">Explore My Work</a>
-        <a href="https://vaibhav0342.github.io/portfolio/" class="btn">Portfolio</a>
-        <a href="https://github.com/vaibhav0342" class="btn">GitHub</a>
+        <a href="https://vaibhav0342.github.io/Web-side/" class="btn">Portfolio</a>
+        <a href="https://github.com/vaibhav0342/" class="btn">GitHub</a>
       </div>
     </div>
 
     <!-- Floating Technology Icons -->
     <div class="floating-icons">
-      <div class="icon">🐳</div> <!-- Placeholder for Docker -->
-      <div class="icon">☸️</div> <!-- Placeholder for Kubernetes -->
-      <div class="icon">☁️</div> <!-- Placeholder for AWS -->
-      <div class="icon">🔧</div> <!-- Placeholder for Jenkins -->
+      <div class="icon">🐳</div>
+      <div class="icon">☸️</div>
+      <div class="icon">☁️</div>
+      <div class="icon">🔧</div>
     </div>
   </div>
+</body>
+</html>
+
 
 </body>
 </html>
